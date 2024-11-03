@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Hello, I'm Hesham: A Design Engineer" />
     <title>Hesham Mohamed</title>
-    <link rel="icon" href="Images/speedometer.png" type="image/x-icon" />
+    <link rel="icon" href="Images/cropped_image.png" type="image/x-icon" />
     <link rel="stylesheet" href="Css/framework.css" />
     <link rel="stylesheet" href="Css/all.min.css" />
     <link rel="stylesheet" href="Css/normalize.css" />
     <link rel="stylesheet" href="Css/master.css" />
   </head>
   <body>
+    <a href="#" aria-label="Go to top" class="toTop">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
     <div class="page">
-      <header>
+      <header class="main">
         <div class="container">
-          <a href="#" class="logo">Hesham</a>
-          <input type="checkbox" id="checked" />
+          <div class="main-logo">
+            <a href="index.html"
+              ><img src="Images/cropped_image.png" alt=""
+            /></a>
+            <a href="#" class="logo">esham</a>
+          </div>
+          <input aria-label="Open&CloseNavBar" type="checkbox" id="checked" />
           <label for="checked" class="icons">
             <i class="fa-solid fa-bars" id="open-menu"></i>
             <i class="fa-solid fa-x" id="close-menu"></i>
@@ -36,9 +44,7 @@
       </header>
       <section class="main">
         <div class="container">
-          <div class="image">
-            <img src="Images/Hesham.png" alt="" />
-          </div>
+
           <div class="text">
             <div>
               <h2>Hello I'm Hesham<br /><span>Design Engineer</span></h2>
@@ -49,26 +55,26 @@
               <div>
                 <a
                   href="https://www.linkedin.com/in/hesham-mohamed-576637226/"
-                  target="_blank"
+                  target="_blank" rel="noopener"
                   ><i title="linkedin" class="fa-brands fa-linkedin-in"></i
                 ></a>
               </div>
               <div>
                 <a
                   href="https://www.behance.net/Eng_Hesham_M_Ossman"
-                  target="_blank"
+                  target="_blank" rel="noopener"
                   ><i title="behance" class="fa-brands fa-behance"></i
                 ></a>
               </div>
               <div>
-                <a href="https://www.facebook.com/max.abdo.370" target="_blank"
+                <a href="https://www.facebook.com/max.abdo.370" target="_blank" rel="noopener"
                   ><i title="facebook" class="fa-brands fa-facebook-f"></i
                 ></a>
               </div>
               <div>
                 <a
                   href="https://www.instagram.com/hesham.mahamed?igsh=MW5zajJ6azF3eDk1OQ=="
-                  target="_blank"
+                  target="_blank" rel="noopener"
                   ><i title="Instagram" class="fa-brands fa-instagram"></i
                 ></a>
               </div>
@@ -77,7 +83,7 @@
         </div>
       </section>
       <section class="expertise" id="expertise">
-        <h2 class="main-heading">Our Expertise</h2>
+        <h2 class="section-heading">Our Expertise</h2>
         <div class="container">
           <div class="technical">
             <h3>Technical&nbsp;Skills</h3>
@@ -169,7 +175,7 @@
         </div>
       </section>
       <section class="services" id="services">
-        <h2 class="main-heading">Services</h2>
+        <h2 class="section-heading">Services</h2>
         <div class="container">
           <div class="service">
             <div class="image">
@@ -188,7 +194,7 @@
           </div>
           <div class="service">
             <div class="image">
-              <img src="Images/dressing room.jpeg" alt="interior-design" />
+              <img src="Images/dressing room.jpeg" alt="Bed rood" />
             </div>
             <div class="info">
               <h3>Dressing rooms</h3>
@@ -204,7 +210,7 @@
           </div>
           <div class="service">
             <div class="image">
-              <img src="Images/kitchen desgin.jpeg" alt="interior-design" />
+              <img src="Images/kitchen desgin.jpeg" alt="Kitchen Design" />
             </div>
             <div class="info">
               <h3>Kitchen design</h3>
@@ -222,7 +228,7 @@
           </div>
           <div class="service">
             <div class="image">
-              <img src="Images/Exterior Design.jpg" alt="interior-design" />
+              <img src="Images/Exterior Design.jpg" alt="Exterior-design" />
             </div>
             <div class="info">
               <h3>Exterior Design</h3>
@@ -240,7 +246,7 @@
             <div class="image">
               <img
                 src="Images/AMD+Carousel+Image-1.jpg"
-                alt="interior-design"
+                alt="Architectural finishes"
               />
             </div>
             <div class="info">
@@ -258,31 +264,112 @@
         </div>
       </section>
       <section class="projects" id="projects">
-        <h2 class="main-heading">Projects</h2>
+        <h2 class="section-heading">Projects</h2>
         <div class="container">
-          <div class="project"></div>
+          <div class="section exterior">
+            <h2>Exterior Design</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Exterior/smallExterior.jpg"
+                alt="Home Exterior"
+              />
+            </div>
+          </div>
+          <div class="section living">
+            <h2>Living Room</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Living/living_room(small).webp"
+                alt="living_room"
+              />
+            </div>
+          </div>
+          <div class="section master">
+            <h2>Master Rooms</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Master/smallMaster.jpg"
+                alt="Master room design"
+              />
+            </div>
+          </div>
+          <div class="section dressing">
+            <h2>Dressing</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Dressing rooms/smallDressing.jpg"
+                alt="Bed Room"
+              />
+            </div>
+          </div>
+          <div class="section children">
+            <h2>Children Rooms</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Children/smallChildren.jpg"
+                alt="children room"
+              />
+            </div>
+          </div>
+          <div class="section kitchen">
+            <h2>Kitchen Design</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/kitchens/smallkitchen.jpg"
+                alt="kitchen image"
+              />
+            </div>
+          </div>
+          <div class="section Bathrooms">
+            <h2>Bathrooms</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Bathroom/smallBath.jpg"
+                alt="Bathroom"
+              />
+            </div>
+          </div>
+          <div class="section booths">
+            <h2>Booths Design</h2>
+            <div class="project">
+              <a href="Prj_one.html" target="_blank">Show More</a>
+              <img
+                src="Images/Booth/smallBooths.jpg"
+                alt="Booth Design"
+              />
+            </div>
+          </div>
         </div>
       </section>
       <section class="contact" id="contact">
-        <h2 class="main-heading">Let's work together</h2>
         <div class="container">
-          <div class="card">
-            <div class="icon">
-              <i class="fa-solid fa-phone"></i>
+          <h2 class="section-heading">Let's work together</h2>
+          <div class="cards-wrapper">
+            <div class="card">
+              <div class="icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div class="info">
+                <span>Phone</span>
+                <p>+20 112 049 8103</p>
+                <p>+20 106 866 8291</p>
+              </div>
             </div>
-            <div class="info">
-              <span>Phone</span>
-              <p>+20 112 049 8103</p>
-              <p>+20 106 866 8291</p>
-            </div>
-          </div>
-          <div class="card">
-            <div class="icon">
-              <i class="fa-solid fa-envelope"></i>
-            </div>
-            <div class="info">
-              <span>Email</span>
-              <a href="mailto:Etch@gamil.com">Heshamet2@gamil.com</a>
+            <div class="card">
+              <div class="icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="info">
+                <span>Email</span>
+                <a href="mailto:Etch@gamil.com">Heshamet2@gamil.com</a>
+              </div>
             </div>
           </div>
         </div>
