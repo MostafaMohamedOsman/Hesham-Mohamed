@@ -110,25 +110,30 @@ html {
   /* } */
 /* } */
 
-/* Small */
-@media (min-width: 768px) {
+
+/* @media (min-width: 768px) {
   .container {
-    width: 90%; /* أفضل من تحديد عرض ثابت */
-    margin: 0 auto; /* لضمان تمركز العنصر */
-    padding: 0 20px; /* قلل الـ padding لجعلها أكثر مرونة */
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 20px;
   }
 }
-/* Medium */
+
 @media (min-width: 992px) {
   .container {
-    width: 80%; /* يمكن تقليل النسبة للشاشات الأكبر */
+    width: 80%;
   }
 }
-/* Large */
+
 @media (min-width: 1200px) {
   .container {
-    width: 70%; /* يسمح بتصميم أفضل على الشاشات العريضة */
+    width: 70%;
   }
+} */
+
+.container {
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
 }
 
 
@@ -161,8 +166,9 @@ html {
 header.main .container {
   position: fixed;
   width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   z-index: 1000;
-  padding: 10px 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -184,8 +190,8 @@ header.main .container::before {
 
 @media (max-width: 991px) {
   header.main .container {
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
@@ -300,14 +306,11 @@ section.main .container {
   background-attachment: fixed;
 }
 
-/* لما نيجي نحط الصورة نرجع الكومنتس دي  */
-/* @media (max-width: 767px) { */
   section.main .container {
     padding: 10px 20px;
     justify-content: center;
     text-align: center;
   }
-/* } */
 
 .main .container::before {
   content: "";
@@ -598,8 +601,7 @@ section.main .container .text {
 
 .services .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  padding: 0 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 40px;
 }
 
@@ -777,7 +779,6 @@ section.main .container .text {
 .projects .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  padding: 0 20px;
   gap: 40px;
 }
 
@@ -797,7 +798,7 @@ section.main .container .text {
 }
 
 .projects .container .section h2 {
-  width: 100%;
+  width: 20rem;
   text-align: center;
   background-color: var(--main-color);
   color: var(--bg-color);
@@ -910,10 +911,7 @@ section.main .container .text {
 }
 
 .contact .container {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 80px 0;
   width: 100%;
   background: url(../Images/landingTwo.jpg) fixed center no-repeat;
   background-size: cover;
@@ -934,20 +932,10 @@ section.main .container .text {
 
 .contact h2 {
   color: var(--bg-color);
-  padding: 0 0 30px;
 }
 
 .contact h2::before {
   background-color: var(--bg-color);
-  transform: translateY(-50%, 20px) !important;
-  -webkit-transform: translate(-50%, 20px) !important;
-  -moz-transform: translate(-50%, 20px) !important;
-  -ms-transform: translate(-50%, 20px) !important;
-  -o-transform: translate(-50%, 20px) !important;
-}
-
-.contact h2::after {
-  bottom: 0;
 }
 
 @media (max-width: 767px) {
@@ -962,15 +950,13 @@ section.main .container .text {
 
 .contact .container .cards-wrapper {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .contact .container .card {
-
+  width: 300px;
   color: var(--main-color);
-  margin-left: 40px;
   background-color: var(--bg-color);
   text-align: center;
   border-radius: 20px;
@@ -988,10 +974,17 @@ section.main .container .text {
   color: wheat;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 697px) {
+  .contact .container .cards-wrapper {
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
   .contact .container .card {
-    margin-left: 0;
-    margin: 25px 0 0;
+    height: 170px;
+  }
+  .contact .container .card:first-child {
+    margin-bottom: 40px;
   }
 }
 
@@ -1040,37 +1033,19 @@ footer {
   color: var(--bg-color);
 }
 
-/* Other Pages Layout*/
+/*! Other Pages Layout*/
 
 .page .main .container img {
   width: 40px;
 }
 
-.page section.preview-pages {
-  background-color: rgba(245, 222, 179, 0.233);
+.projects-wrapper .container {
+  width: 100%;
   position: relative;
-  padding-top: 60px;
-  padding: 70px 20px 0;
-  columns: 400px;
-  gap: 20px;
-}
-
-.page section.preview-pages img {
-  max-width: 100%;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.363);
-}
-
-.projects-wrapper .container{
-  position: relative;
-  top: 64px;
+  top: 84px;
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill,minmax(300px, 1fr));
   gap: 20px;
-  
 }
+
+.main .container {}
