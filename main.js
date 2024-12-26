@@ -28,7 +28,7 @@ function initialSlider(slider) {
     //Get pagination items
     let paginationBullets = Array.from(slider.querySelectorAll('.pagination-ul li'))
 
-    //Loop through all bullets itesms
+    //Loop through all bullets items
     paginationBullets.forEach(function (bullet) {
     bullet.addEventListener("click", function () {
         currentSlide = parseInt(this.getAttribute('data-index'));
@@ -111,9 +111,6 @@ function initialSlider(slider) {
     }
 
 }
-
-
-
-
 // Initialize All Sliders
 document.querySelectorAll('.slider-wrapper').forEach(initialSlider);
+

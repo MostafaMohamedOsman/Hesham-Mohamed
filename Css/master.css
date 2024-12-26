@@ -9,10 +9,8 @@
 
 /* End variables */
 /* Start Global Rules */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-  font-family: "Poppins", sans-serif;
   box-sizing: border-box;
   margin: 0;
 }
@@ -28,8 +26,14 @@ ul {
 }
 
 body {
+  font-family: 'Cairo', sans-serif;
   background-color: var(--bg-color);
   position: relative;
+}
+
+::selection {
+  background-color: var(--second-color);
+  color: wheat
 }
 
 ::-webkit-scrollbar {
@@ -300,7 +304,7 @@ section.main .container .text {
   display: block;
   color: wheat;
   font-size: 3em;
-  font-weight: 600;
+  font-weight: 700;
   margin: 20px 0 15px;
   letter-spacing: -1px;
   -webkit-transform: translateX(-4px);
@@ -330,8 +334,8 @@ section.main .container .text {
 .main .container > div a.main-btn {
   position: relative;
   width: fit-content;
-  font-weight: 600;
-  padding: 15px;
+  font-weight: 700;
+  padding: 10px 15px;
   color: var(--bg-color);
   background: linear-gradient(
     to right,
@@ -392,7 +396,7 @@ section.main .container .text {
     var(--bg-color) 50%,
     var(--main-color) 50%
   );
-  background-size: 200% 100%;
+  background-size: 203% 103%;
   background-position: right bottom;
   border: 2px solid var(--main-color);
   -webkit-border-radius: 50%;
@@ -1021,9 +1025,10 @@ footer {
   padding: 10px 0;
   width: 100%;
   text-align: center;
-  background-color: black;
+  background-color: var(--second-color);
   color: white;
 }
+
 
 /*! ---------------------------------Other Pages Layout--------------------------------*/
 
@@ -1036,33 +1041,32 @@ footer {
 }
 
 h1.section-heading {
-  top: 80px;
-  padding-bottom: 50px;
+  top: 50px;
+  padding-bottom: 70px;
   font-size: 40px;
   word-spacing: 3px;
-  font-style: italic;
 }
 
 h1.section-heading::before {
   width: 250px ;
-  -webkit-transform: translate(-50%, 20px);
-  -moz-transform: translate(-50%, 20px);
-  -ms-transform: translate(-50%, 20px);
-  -o-transform: translate(-50%, 20px);
-  transform: translate(-50%, 20px);
+  transform: translate(-50%, 15px);
+  -webkit-transform: translate(-50%, 15px);
+  -moz-transform: translate(-50%, 15px);
+  -ms-transform: translate(-50%, 15px);
+  -o-transform: translate(-50%, 15px);
 }
 
 h1.section-heading::after {
-  -webkit-transform: translate(-50%,  29px ) rotate(45deg);
-  -moz-transform: translate(-50%,  29px ) rotate(45deg);
-  -ms-transform: translate(-50%,  29px ) rotate(45deg);
-  -o-transform: translate(-50%,  29px ) rotate(45deg);
-  transform: translate(-50%,  29px ) rotate(45deg);
+  -webkit-transform: translate(-50%, 24px ) rotate(45deg);
+  -moz-transform: translate(-50%, 24px ) rotate(45deg);
+  -ms-transform: translate(-50%, 24px ) rotate(45deg);
+  -o-transform: translate(-50%, 24px ) rotate(45deg);
+  transform: translate(-50%, 24px ) rotate(45deg);
 }
 
 
 .projects-wrapper {
-  padding: 90px 0 25px;
+  padding: 0 0 25px;
 }
 
 .projects-wrapper .container {
@@ -1075,7 +1079,7 @@ h1.section-heading::after {
 
 @media (max-width: 767px) {
   .projects-wrapper {
-    padding: 83px 0 20px;
+    padding: 0 0 20px;
   }
 }
 
@@ -1274,15 +1278,4 @@ h1.section-heading::after {
 
 .slider-controls ul li.active {
   background-color: var(--second-color);
-}
-
-
-
-
-
-
-
-footer {
-  position: relative;
-  bottom: 0;
 }
