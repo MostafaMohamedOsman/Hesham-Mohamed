@@ -126,7 +126,7 @@ html {
   border-radius: 50%;
 }
 
-header.main .container {
+header .container {
   position: fixed;
   width: 100%;
   top: 0;
@@ -139,11 +139,11 @@ header.main .container {
   box-shadow: 0 2px 20px 0px #bc9788;
 }
 
-header.main .container.sec-pages {
+header .container.sec-pages {
   justify-content: center;
 }
 
-header.main .container::before {
+header .container::before {
   content: "";
   position: absolute;
   left: 0;
@@ -156,11 +156,15 @@ header.main .container::before {
   z-index: -1;
 }
 
-header.main .main-logo {
+header .main-logo {
   display: flex;
 }
 
-header.main .logo {
+header .main-logo img {
+  width: 40px;
+  height: 40px;
+}
+header .logo {
   display: flex;
   align-items: center;
   color: wheat;
@@ -168,13 +172,12 @@ header.main .logo {
   font-weight: 700;
 }
 
-header.main .links li a {
-  font-size: 1em;
-  font-weight: 500;
-  padding: 10px 15px;
-  margin-left: 1.7rem;
-  position: relative;
-  color: var(--bg-color);
+header .links li {
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
   -webkit-transition: var(--main-transition);
   -moz-transition: var(--main-transition);
   -ms-transition: var(--main-transition);
@@ -182,7 +185,19 @@ header.main .links li a {
   transition: var(--main-transition);
 }
 
-header.main .container .icons i {
+header .links li a {
+  color: var(--bg-color);
+  width: 100%;
+  height: 100%;
+  font-size: 1.1em;
+  font-weight: 500;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .container .icons i {
   color: var(--bg-color);
   display: none;
   cursor: pointer;
@@ -202,10 +217,10 @@ header.main .container .icons i {
 }
 
 @media (max-width: 767px) {
-  header.main .container .icons i {
+  header .container .icons i {
     display: inline-flex;
   }
-  header.main .container .icons i:nth-child(2) {
+  header .container .icons i:nth-child(2) {
     display: none;
   }
 }
@@ -219,7 +234,7 @@ header.main .container .icons i {
 }
 
 @media (max-width: 767px) {
-  header.main .links {
+  header .links {
     flex-direction: column;
     position: absolute;
     width: 100vw;
@@ -235,9 +250,14 @@ header.main .container .icons i {
     -o-transition: 0.5s ease;
     transition: 0.5s ease;
   }
-  header.main .links li a {
-    display: block;
+  header .links li {
     width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  header .links li a {
+    display: flex;
     text-align: center;
     margin-left: 0;
   }
@@ -247,14 +267,18 @@ header.main .container .icons i {
   left: 0;
 }
 
-header.main .links li a:hover {
+header .links li:hover {
+  background-color: var(--bg-color);
+}
+
+header .links li:hover a {
   background-color: var(--bg-color);
   border-color: var(--bg-color);
   color: var(--main-color);
-  font-weight: 500;
+  font-weight: 700;
 }
 
-section.main .container {
+section.home .container {
   display: flex;
   background: url(../Images/landing.jpg) no-repeat;
   position: relative;
@@ -266,13 +290,13 @@ section.main .container {
   background-attachment: fixed;
 }
 
-  section.main .container {
-    padding: 10px 20px;
-    justify-content: center;
-    text-align: center;
-  }
+section.home .container {
+  padding: 10px 20px;
+  justify-content: center;
+  text-align: center;
+}
 
-.main .container::before {
+.home .container::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -282,25 +306,24 @@ section.main .container {
   background: rgba(0, 0, 0, 0.5);
 }
 
-section.main .container .text {
+section.home .container .text {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* margin-left: 130px; */
 }
 
-.main .container > div {
+.home .container > div {
   position: relative;
 }
 
-.main h2 {
+.home h2 {
   font-size: 1.4em;
   font-weight: bold;
   font-weight: 600;
   color: var(--bg-color);
 }
 
-.main h2 span {
+.home h2 span {
   display: block;
   color: wheat;
   font-size: 3em;
@@ -315,7 +338,7 @@ section.main .container .text {
 }
 
 @media (max-width: 767px) {
-  .main h2 span {
+  .home h2 span {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
@@ -324,14 +347,14 @@ section.main .container .text {
   }
 }
 
-.main h3 {
+.home h3 {
   color: var(--bg-color);
   font-weight: 600;
   font-size: 1.5em;
   padding-bottom: 30px;
 }
 
-.main .container > div a.main-btn {
+.home .container > div a.main-btn {
   position: relative;
   width: fit-content;
   font-weight: 700;
@@ -359,13 +382,13 @@ section.main .container .text {
 }
 
 
-.main .container > div a.main-btn:hover {
+.home .container > div a.main-btn:hover {
   background-position: left bottom;
   color: var(--main-color);
   border-color: var(--bg-color);
 }
 
-.main .social-icons {
+.home .social-icons {
   display: flex;
   justify-content: center;
   margin-top: 35px;
@@ -373,7 +396,7 @@ section.main .container .text {
 }
 
 @media (max-width: 767px) {
-  .main .social-icons {
+  .home .social-icons {
     justify-content: center;
     -webkit-transform: translateX(0px);
     -moz-transform: translateX(0px);
@@ -383,7 +406,7 @@ section.main .container .text {
   }
 }
 
-.main .social-icons > div {
+.home .social-icons > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -411,11 +434,11 @@ section.main .container .text {
   transition: 0.5s ease;
 }
 
-.main .social-icons > div:hover {
+.home .social-icons > div:hover {
   background-position: left bottom;
 }
 
-.main .social-icons > div a i {
+.home .social-icons > div a i {
   color: var(--bg-color);
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
@@ -424,11 +447,11 @@ section.main .container .text {
   transition: 0.5s;
 }
 
-.main .social-icons > div:hover a i {
+.home .social-icons > div:hover a i {
   color: var(--main-color);
 }
 
-.main .image {
+.home .image {
   width: 20%;
   display: flex;
   flex-wrap: wrap;
@@ -436,18 +459,18 @@ section.main .container .text {
   justify-content: right;
 }
 
-.main img {
+.home img {
   width: 650px;
 }
 
 @media (max-width: 767px) {
-  .main .image {
+  .home .image {
     display: none;
   }
 }
 
 @media (min-width: 768px) {
-  .main .image {
+  .home .image {
     right: -150px;
   }
 }
@@ -899,7 +922,7 @@ section.main .container .text {
 .contact .container {
   padding: 80px 0;
   width: 100%;
-  background: url(../Images/landing-3.jpg) fixed center no-repeat;
+  background: url(../Images/landing-3.png) fixed center no-repeat;
   background-size: cover;
   position: relative;
 }
@@ -1032,11 +1055,11 @@ footer {
 
 /*! ---------------------------------Other Pages Layout--------------------------------*/
 
-.page .main .container img {
+.page .home .container img {
   width: 40px;
 }
 
-.page .main .container.sec-pages {
+.page .home .container.sec-pages {
   margin-bottom: 100px;
 }
 
@@ -1049,11 +1072,11 @@ h1.section-heading {
 
 h1.section-heading::before {
   width: 250px ;
-  transform: translate(-50%, 15px);
   -webkit-transform: translate(-50%, 15px);
   -moz-transform: translate(-50%, 15px);
   -ms-transform: translate(-50%, 15px);
   -o-transform: translate(-50%, 15px);
+  transform: translate(-50%, 15px);
 }
 
 h1.section-heading::after {
@@ -1064,6 +1087,25 @@ h1.section-heading::after {
   transform: translate(-50%, 24px ) rotate(45deg);
 }
 
+@media (max-width: 767px) {
+  h1.dressing::before {
+    transform: translate(-50%, 40px);
+    -webkit-transform: translate(-50%, 40px);
+    -moz-transform: translate(-50%, 40px);
+    -ms-transform: translate(-50%, 40px);
+    -o-transform: translate(-50%, 40px);
+  }
+}
+
+@media (max-width: 767px) {
+  h1.dressing::after {
+    transform: translate(-50%, 48px) rotate(45deg);
+    -webkit-transform: translate(-50%, 48px) rotate(45deg);
+    -moz-transform: translate(-50%, 48px) rotate(45deg);
+    -ms-transform: translate(-50%, 48px) rotate(45deg);
+    -o-transform: translate(-50%, 48px) rotate(45deg);
+}
+}
 
 .projects-wrapper {
   padding: 0 0 25px;
