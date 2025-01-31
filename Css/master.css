@@ -103,27 +103,53 @@ html {
 
 /* End Global Rules */
 
-.toTop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.scroll-to-top {
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+  right: 25px;
+  bottom: 25px;
+  width: 35px;
+  height: 35px;
   position: fixed;
-  z-index: 100;
-  right: 30px;
-  bottom: 30px;
-  width: 40px;
-  height: 40px;
+  -webkit-transition: all 0.3s ease ;
+  -moz-transition: all 0.3s ease ;
+  -ms-transition: all 0.3s ease ;
+  -o-transition: all 0.3s ease ;
+  transition: all 0.3s ease ;
+}
+
+.scroll-to-top span {
+  display: block;
+  text-align: center;
   background-color: rgb(33, 25, 7);
   font-weight: bold;
   font-size: 27px;
   color: white;
   border: 3px solid;
   outline: 2px solid var(--second-color);
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: var(--main-transition);
+  -moz-transition: var(--main-transition);
+  -ms-transition: var(--main-transition);
+  -o-transition: var(--main-transition);
+  transition: var(--main-transition);
+}
+
+.scroll-to-top span:hover {
+  background-color: var(--main-color);
+}
+
+.scroll-to-top span::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f062";
+  font-size: 25px;
+  position: relative;
 }
 
 header .container {
@@ -195,6 +221,11 @@ header .links li a {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-transition: var(--main-transition);
+  -moz-transition: var(--main-transition);
+  -ms-transition: var(--main-transition);
+  -o-transition: var(--main-transition);
+  transition: var(--main-transition);
 }
 
 header .container .icons i {
@@ -1087,24 +1118,24 @@ h1.section-heading::after {
   transform: translate(-50%, 24px ) rotate(45deg);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 449px) {
   h1.dressing::before {
-    transform: translate(-50%, 40px);
     -webkit-transform: translate(-50%, 40px);
     -moz-transform: translate(-50%, 40px);
     -ms-transform: translate(-50%, 40px);
     -o-transform: translate(-50%, 40px);
+    transform: translate(-50%, 40px);
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 449px) {
   h1.dressing::after {
-    transform: translate(-50%, 48px) rotate(45deg);
     -webkit-transform: translate(-50%, 48px) rotate(45deg);
     -moz-transform: translate(-50%, 48px) rotate(45deg);
     -ms-transform: translate(-50%, 48px) rotate(45deg);
     -o-transform: translate(-50%, 48px) rotate(45deg);
-}
+    transform: translate(-50%, 48px) rotate(45deg);
+  }
 }
 
 .projects-wrapper {

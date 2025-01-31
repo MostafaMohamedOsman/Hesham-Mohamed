@@ -1,3 +1,22 @@
+let scrollToTopBtn = document.querySelector(".scroll-to-top");
+window.onscroll = () => {
+    if(window.scrollY >= 600) {
+        scrollToTopBtn.style.display = "block";
+        scrollToTopBtn.style.opacity = "1";
+    } else {
+        scrollToTopBtn.style.opacity = "0";
+    }
+}
+
+scrollToTopBtn.onclick = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+// ---------------------------------------------------------------------------
+
 function initialSlider(slider) {
     const sliderImages = Array.from(slider.querySelectorAll('.slider-container img'));
     const sliderCount = sliderImages.length;
@@ -92,8 +111,6 @@ function initialSlider(slider) {
             //remove disabled class from the next button
             nextButton.classList.remove("disabled");
         }
-
-
     }
 
     //Remove All Active Classes
@@ -114,3 +131,5 @@ function initialSlider(slider) {
 // Initialize All Sliders
 document.querySelectorAll('.slider-wrapper').forEach(initialSlider);
 
+
+// ---------------------------------------------------------------------------
