@@ -311,7 +311,7 @@ header .links li:hover a {
 
 section.home .container {
   display: flex;
-  background: url(../Images/landing.jpg) no-repeat;
+  background: url(../Images/landing.jpg) fixed center no-repeat;
   position: relative;
   width: 100%;
   align-content: center;
@@ -596,7 +596,7 @@ section.home .container .text {
 
 .services {
   padding: 70px 0;
-  background: url(../Images/landing-2.webp) no-repeat;
+  background: url(../Images/landing-2.webp) fixed center no-repeat;
   position: relative;
   width: 100%;
   align-content: center;
@@ -953,7 +953,7 @@ section.home .container .text {
 .contact .container {
   padding: 80px 0;
   width: 100%;
-  background: url(../Images/landing-3.png) fixed center no-repeat;
+  background: url(../Images/landing-3.jpg) fixed center no-repeat;
   background-size: cover;
   position: relative;
 }
