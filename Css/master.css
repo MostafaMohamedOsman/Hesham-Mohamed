@@ -2,6 +2,7 @@
 :root {
   --main-color: #412e20;
   --second-color: #1f1610;
+  --wheat-color: wheat;
   --text-color: #4b382a;
   --bg-color: #fffcf7;
   --main-transition: 0.3s;
@@ -33,7 +34,7 @@ body {
 
 ::selection {
   background-color: var(--second-color);
-  color: wheat
+  color: var(--wheat-color)
 }
 
 ::-webkit-scrollbar {
@@ -165,6 +166,14 @@ header .container {
   box-shadow: 0 2px 20px 0px #bc9788;
 }
 
+@media (max-width: 767px) {
+  header .container {
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 header .container.sec-pages {
   justify-content: center;
 }
@@ -193,7 +202,7 @@ header .main-logo img {
 header .logo {
   display: flex;
   align-items: center;
-  color: wheat;
+  color: var(--wheat-color);
   font-size: 1.8em;
   font-weight: 700;
 }
@@ -229,18 +238,23 @@ header .links li a {
 }
 
 header .container .icons i {
-  color: var(--bg-color);
+  color: var(--wheat-color);
   display: none;
   cursor: pointer;
   font-size: 1.7em;
   position: absolute;
-  right: 2.4rem;
+  right: 20px ;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
+  transition:all var(--main-transition);
+  -webkit-transition:all var(--main-transition);
+  -moz-transition:all var(--main-transition);
+  -ms-transition:all var(--main-transition);
+  -o-transition:all var(--main-transition);
 }
 
 #checked {
@@ -356,7 +370,7 @@ section.home .container .text {
 
 .home h2 span {
   display: block;
-  color: wheat;
+  color: var(--wheat-color);
   font-size: 3em;
   font-weight: 700;
   margin: 20px 0 15px;
@@ -660,12 +674,14 @@ section.home .container .text {
   transition: var(--main-transition);
 }
 
-.services .container .service:hover {
-  -webkit-transform: translateY(-10px);
-  -moz-transform: translateY(-10px);
-  -ms-transform: translateY(-10px);
-  -o-transform: translateY(-10px);
-  transform: translateY(-10px);
+@media (min-width: 768px) {
+  .services .container .service:hover {
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
 }
 
 .services .container .service .image {
@@ -693,18 +709,14 @@ section.home .container .text {
   transition: var(--main-transition) ease;
 }
 
-.services .container .service:hover .image::after {
-  bottom: -50px;
-  -webkit-transform: rotate(10deg);
-  -moz-transform: rotate(10deg);
-  -ms-transform: rotate(10deg);
-  -o-transform: rotate(10deg);
-  transform: rotate(10deg);
-}
-
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .services .container .service:hover .image::after {
-    bottom: -70px;
+    bottom: -50px;
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    transform: rotate(10deg);
   }
 }
 
@@ -774,6 +786,12 @@ section.home .container .text {
   font-weight: 500;
 }
 
+@media (max-width: 767px) {
+  .services .container .service p {
+    max-height: 1000px;
+  }
+}
+
 .services .container .service p::-webkit-scrollbar {
   width: 2px;
 }
@@ -808,18 +826,19 @@ section.home .container .text {
 }
 
 .projects .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 767px) {
   .projects .container {
-    grid-template-columns: minmax(150px, 1fr);
     gap: 20px;
-    padding: 0 20px;
   }
 }
+
 
 .projects .container .section {
   display: flex;
@@ -836,11 +855,11 @@ section.home .container .text {
   padding: 10px;
   box-shadow: 0 5px 10px 0 #624134;
   z-index: 1;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
   -webkit-transition: var(--main-transition);
   -moz-transition: var(--main-transition);
   -ms-transition: var(--main-transition);
@@ -1021,7 +1040,7 @@ section.home .container .text {
 
 .contact .container .card:hover {
   background-color: var(--second-color);
-  color: wheat;
+  color: var(--wheat-color);
 }
 
 @media (max-width: 697px) {
@@ -1049,7 +1068,7 @@ section.home .container .text {
 }
 
 .contact .container .card:hover i {
-  color: wheat;
+  color: var(--wheat-color);
 }
 
 .contact .container .card span {
@@ -1072,7 +1091,7 @@ section.home .container .text {
 }
 
 .contact .container .card:hover a {
-  color: wheat;
+  color: var(--wheat-color);
 }
 
 footer {
