@@ -17,7 +17,6 @@ scrollToTopBtn.onclick = () => {
 }
 // ---------------------------------------------------------------------------
 //^ mobile nave bar mouse over
-
 const allElements = Array.from(document.querySelectorAll("body *"));
 const CheckBox = document.getElementById("checked");
 
@@ -26,6 +25,38 @@ document.body.addEventListener("click", event => {
         CheckBox.checked = false;
     }
 });
+
+
+// ---------------------------------------------------------------------------
+//^ Full screen when the user click on the image
+
+
+function initialFullScreen (element) {
+    const popupImg = element.querySelector(".popup-img");
+    const popupClose = element.querySelector(".slider-wrapper .popup-img .close-popup");
+    element.querySelectorAll(".slider-container img").forEach(image => {
+        image.onclick = () => {
+            element.querySelector(".popup-img img").src = image.getAttribute("src");
+            popupImg.classList.add("showBlock");
+            // تشغيل التأثير بعد لحظة
+            setTimeout(() => {
+                popupImg.classList.add("showOpacity");
+            },100);
+            document.body.classList.add("no-scroll");
+        };
+    });
+    
+    popupClose.onclick = () => {
+        setTimeout( () => {
+            popupImg.classList.remove("showOpacity");
+        },10);
+        popupImg.classList.remove("showBlock");
+        document.body.classList.remove("no-scroll");
+    };
+}
+
+document.querySelectorAll('.slider-wrapper').forEach(initialFullScreen);
+
 
 // ---------------------------------------------------------------------------
 //^ Image slider parts
@@ -36,8 +67,9 @@ function initialSlider(slider) {
     let slideElementNumber = slider.querySelector(".slide-number");
     let prevButton = slider.querySelector('.prev');
     let nextButton = slider.querySelector('.next');
-    let indicatorsContainer = slider.querySelector('.indicators');
     let paginationElement = document.createElement("ul");
+    let popupCurrentImg = 1;
+
     paginationElement.setAttribute("class", "pagination-ul");
     for (let index = 1; index <= sliderCount; index++) {
         let paginationItem = document.createElement('li');
@@ -119,35 +151,39 @@ function initialSlider(slider) {
         //Loop Through pagination
         paginationBullets.forEach(function(bullet) {
             bullet.classList.remove('active');
-        })
+        });
     }
+
+
+    // ---------------------------------------------------------------------------
+    //^ images slider inside the popup (full-screen mode)
+
+        const prevPopupButton = slider.querySelector(".popup-img .arrow.left");
+        const nextPopupButton = slider.querySelector(".popup-img .arrow.right");
+
+        //^ Change the popupCurrentImg to the current image
+        sliderImages.forEach(function(image, index) {
+            image.addEventListener("click", () => {
+                popupCurrentImg = index + 1;
+            });
+        });
+
+        //^ The Action that will happend after clicking on the prevPopupButton
+        prevPopupButton.addEventListener("click", () => {
+            if(popupCurrentImg > 1) {
+                popupCurrentImg--;
+                slider.querySelector(".popup-img img").src = sliderImages[popupCurrentImg - 1].src;
+            }
+        });
+
+        //^ The Action that will happend after clicking on the nextPopupButton
+        nextPopupButton.addEventListener("click", () => {
+            if(popupCurrentImg != sliderCount) {
+                popupCurrentImg++;
+                slider.querySelector(".popup-img img").src = sliderImages[popupCurrentImg - 1].src;
+            };
+        })
 }
 // Initialize All Sliders
 document.querySelectorAll('.slider-wrapper').forEach(initialSlider);
-
-// ---------------------------------------------------------------------------
-//^ Full screen when the user click on the image
-
-const popupImg = document.querySelector(".popup-img");
-const popupClose = document.querySelector(".slider-wrapper .popup-img span");
-
-document.querySelectorAll(".slider-container img").forEach(image => {
-    image.onclick = () => {
-        document.querySelector(".popup-img img").src = image.getAttribute("src");
-        popupImg.classList.add("showBlock");
-        // تشغيل التأثير بعد لحظة
-        setTimeout(() => {
-            popupImg.classList.add("showOpacity");
-        },100);
-        document.body.classList.add("no-scroll");
-    };
-});
-
-popupClose.onclick = () => {
-    setTimeout( () => {
-        popupImg.classList.remove("showOpacity");
-    },10);
-    popupImg.classList.remove("showBlock");
-    document.body.classList.remove("no-scroll");
-};
 

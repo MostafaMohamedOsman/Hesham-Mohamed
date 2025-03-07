@@ -1430,14 +1430,14 @@ h1.section-heading::after {
   cursor: no-drop;
 }
 
-.slider-controls {
-  .next.disabled:hover {
-    background-color: #412e20a3;
-  }
-  .prev.disabled:hover {
-    background-color: #412e20a3;
-  }
+.fa-arrow-right-long::before {
+  content: "\276F";
 }
+
+.fa-arrow-left-long::before {
+  content: "\276E";
+}
+
 
 .slider-container .slide-number {
   position: absolute;
@@ -1606,26 +1606,57 @@ h1.section-heading::after {
   transform: translate(-50%, -50%);
 }
 
-.popup-img span.close-popup {
+.popup-img span {
   position: absolute;
-  right: 25px;
-  top: 0px;
-  font-size: 40px;
-  font-weight: bolder;
-  color: #fff;
   cursor: pointer;
   z-index: 9998;
 }
 
-.popup-img span.close-popup::before {
-  content: "\00D7";
+.popup-img span.close-popup {
+  right: 25px;
+  top: 0px;
+}
+
+.popup-img span::before {
   font-size: 44px;
   font-weight: bold;
-  color: white;
+  color: var(--white-color);
   cursor: pointer;
   transition: color 0.3s;
 }
 
+.popup-img span.close-popup::before {
+  content: "\00D7";
+}
+
+
 .popup-img span.close-popup:hover::before {
   color: red; /* تغيير اللون عند التمرير */
+}
+
+.popup-img span.arrow {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.popup-img span.arrow:hover::before {
+  color: red;
+}
+
+.popup-img span.arrow.left {
+  left: 5px;
+}
+.popup-img span.arrow.right {
+  right: 5px;
+}
+
+.popup-img span.arrow.left::before {
+  content: "\276E";
+}
+.popup-img span.arrow.right::before {
+  content: "\276F";
 }
