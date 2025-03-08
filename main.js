@@ -25,12 +25,12 @@ document.body.addEventListener("click", event => {
         CheckBox.checked = false;
     }
 });
-
+window.addEventListener("scroll", () => {
+        CheckBox.checked = false;
+});
 
 // ---------------------------------------------------------------------------
 //^ Full screen when the user click on the image
-
-
 function initialFullScreen (element) {
     const popupImg = element.querySelector(".popup-img");
     const popupClose = element.querySelector(".slider-wrapper .popup-img .close-popup");
@@ -53,16 +53,28 @@ function initialFullScreen (element) {
         popupImg.classList.remove("showBlock");
         document.body.classList.remove("no-scroll");
     };
-}
 
+    popupImg.addEventListener("click", (e) => {
+        if(e.target === popupImg) {
+            setTimeout( () => {
+                popupImg.classList.remove("showOpacity");
+            },10);
+            popupImg.classList.remove("showBlock");
+            document.body.classList.remove("no-scroll");
+        }
+        
+    });
+}
 document.querySelectorAll('.slider-wrapper').forEach(initialFullScreen);
 
 
 // ---------------------------------------------------------------------------
 //^ Image slider parts
 function initialSlider(slider) {
+    const popupImg = slider.querySelector(".popup-img");
     const sliderImages = Array.from(slider.querySelectorAll('.slider-container img'));
     const sliderCount = sliderImages.length;
+    const sliderImagesBox = slider.querySelector('.slider-container');
     let currentSlide = 1;
     let slideElementNumber = slider.querySelector(".slide-number");
     let prevButton = slider.querySelector('.prev');
@@ -91,6 +103,23 @@ function initialSlider(slider) {
     theChecker();
     nextButton.onclick = nextSlide;
     prevButton.onclick = prevSlide;
+
+    //^ Swipe and touches for mobile
+    let startX = 0;
+            sliderImagesBox.addEventListener ("touchstart", (event) => {
+            startX = event.touches[0].clientX;
+        });
+            sliderImagesBox.addEventListener ("touchend", (event) => {
+            let endX = event.changedTouches[0].clientX;
+            let pixelsDiffer = endX - startX;
+        
+            if(pixelsDiffer > 50) {
+                prevSlide();
+            } else if (pixelsDiffer < -50) {
+                nextSlide();
+            }
+        });
+
     function nextSlide () {
         if(nextButton.classList.contains('disabled')) {
             return 0;
@@ -158,32 +187,60 @@ function initialSlider(slider) {
     // ---------------------------------------------------------------------------
     //^ images slider inside the popup (full-screen mode)
 
-        const prevPopupButton = slider.querySelector(".popup-img .arrow.left");
-        const nextPopupButton = slider.querySelector(".popup-img .arrow.right");
+    const prevPopupButton = slider.querySelector(".popup-img .arrow.left");
+    const nextPopupButton = slider.querySelector(".popup-img .arrow.right");
 
-        //^ Change the popupCurrentImg to the current image
-        sliderImages.forEach(function(image, index) {
-            image.addEventListener("click", () => {
-                popupCurrentImg = index + 1;
-            });
+    //^ Change the popupCurrentImg to the current image
+    sliderImages.forEach(function(image, index) {
+        image.addEventListener("click", () => {
+            popupCurrentImg = index + 1;
         });
+    });
 
-        //^ The Action that will happend after clicking on the prevPopupButton
-        prevPopupButton.addEventListener("click", () => {
-            if(popupCurrentImg > 1) {
-                popupCurrentImg--;
-                slider.querySelector(".popup-img img").src = sliderImages[popupCurrentImg - 1].src;
-            }
-        });
+    //^ The Action that will happend after clicking on the prevPopupButton
+    function fullScreenPrevImage () {
+        if(popupCurrentImg > 1) {
+            popupCurrentImg--;
+            slider.querySelector(".popup-img img").src = sliderImages[popupCurrentImg - 1].src;
+        }
+    }
+    //^ The Action that will happend after clicking on the nextPopupButton
+    function fullScreenNextImage () {
+        if(popupCurrentImg != sliderCount) {
+            popupCurrentImg++;
+            slider.querySelector(".popup-img img").src = sliderImages[popupCurrentImg - 1].src;
+        };
+    }
+    prevPopupButton.addEventListener("click", fullScreenPrevImage);
+    nextPopupButton.addEventListener("click", fullScreenNextImage);
 
-        //^ The Action that will happend after clicking on the nextPopupButton
-        nextPopupButton.addEventListener("click", () => {
-            if(popupCurrentImg != sliderCount) {
-                popupCurrentImg++;
-                slider.querySelector(".popup-img img").src = sliderImages[popupCurrentImg - 1].src;
-            };
-        })
+    // //^ Swipe and touches for mobile
+    let startFullScreenX = 0;
+    popupImg.addEventListener("touchstart", (event) => {
+        startFullScreenX = event.touches[0].clientX;
+    });
+    popupImg.addEventListener("touchend", (event) => {
+        let endFullScreenX = event.changedTouches[0].clientX;
+        let pixelsDiffer = endFullScreenX - startFullScreenX;
+
+        if(pixelsDiffer > 50) {
+            fullScreenPrevImage ();
+        } else if (pixelsDiffer < -50) {
+            fullScreenNextImage ();
+        }
+    });
 }
 // Initialize All Sliders
 document.querySelectorAll('.slider-wrapper').forEach(initialSlider);
 
+let images = document.querySelectorAll("img");
+images.forEach(element => {
+    element.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+    });
+});
+images.forEach(element => {
+    element.addEventListener("dragstart", (event) => {
+        event.preventDefault();
+    });
+});
