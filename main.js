@@ -1,93 +1,88 @@
 //^ Header move on scroll
 let header = document.querySelector("header .container");
-if (header) {
-    let headerHeight = header.offsetHeight;
-    let lastScrollY = 0;
+let headerHeight = header.offsetHeight;
+let lastScrollY = 0;
 
-    window.addEventListener("scroll", () => {
-        let currentScrollY = window.scrollY;
-        if (currentScrollY >= 50 && currentScrollY >= lastScrollY) {
-            header.style.cssText = `transform: translateY(-${headerHeight}px); position: fixed;`;
-        } else if (currentScrollY < lastScrollY) {
-            header.style.cssText = `transform: translateY(0px);`;
-        }
-        lastScrollY = currentScrollY;
-    });
-}
+window.addEventListener("scroll", () => {
+    let currentScrollY = window.scrollY;
+    if (currentScrollY >= 50 && currentScrollY >= lastScrollY) {
+        header.style.cssText = `transform: translateY(-${headerHeight}px); position: fixed;`;
+    } else if (currentScrollY < lastScrollY) {
+        header.style.cssText = `transform: translateY(0px);`;
+    }
+    lastScrollY = currentScrollY;
+});
 
-//^ Scroll to top
+//^ Scoll to top
 let scrollToTopBtn = document.querySelector(".scroll-to-top");
-if (scrollToTopBtn) {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY >= 600) {
-            scrollToTopBtn.style.display = "block";
-            scrollToTopBtn.style.opacity = "1";
-        } else {
-            scrollToTopBtn.style.opacity = "0";
-        }
-    });
-
-    scrollToTopBtn.onclick = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
+window.onscroll = () => {
+    if (window.scrollY >= 600) {
+        scrollToTopBtn.style.display = "block";
+        scrollToTopBtn.style.opacity = "1";
+    } else {
+        scrollToTopBtn.style.opacity = "0";
+    }
 }
 
-//^ Image under the nav bar
+scrollToTopBtn.onclick = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+// ---------------------------------------------------------------------------
+//^ image under the nav bar
 const mainImg = document.querySelector(".home .image");
-if (mainImg && header) {
-    mainImg.style.top = `${header.offsetHeight}px`;
-}
 
-//^ Mobile nav bar mouse over
+// mainImg.style.top = `${headerHeight}px`
+
+//^ mobile nav bar mouse over
+const allElements = Array.from(document.querySelectorAll("body *"));
 const CheckBox = document.getElementById("checked");
-if (CheckBox) {
-    document.body.addEventListener("click", event => {
-        if (event.target !== CheckBox && !event.target.closest("ul.links li") && !event.target.closest(".icons")) {
-            CheckBox.checked = false;
-        }
-    });
 
-    window.addEventListener("scroll", () => {
+document.body.addEventListener("click", event => {
+    if (event.target !== CheckBox && !event.target.closest("ul.links li") && !event.target.closest(".icons")) {
         CheckBox.checked = false;
-    });
-}
+    }
+});
+window.addEventListener("scroll", () => {
+    CheckBox.checked = false;
+});
+// ---------------------------------------------------------------------------
+//^ Annimation
 
-//^ Animation
 const skills = document.querySelector(".technical ul");
 const exps = document.querySelector(".management ul");
 const serviceItems = document.querySelectorAll(".services .container .service");
 
-if (skills && exps && serviceItems.length > 0) {
-    const callback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                const target = entry.target;
-                if (target === skills) {
-                    skills.classList.add("animate");
-                } else if (target === exps) {
-                    exps.classList.add("animate-two");
-                } else {
-                    target.classList.add("serice-animate");
-                    observer.unobserve(target);
-                }
+const callback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            const target = entry.target;
+            if (target === skills) {
+                skills.classList.add("animate");
+            } else if (target === exps) {
+                exps.classList.add("animate-two");
+            } else {
+                target.classList.add("service-animate");
+                observer.unobserve(target);
             }
-        });
-    };
-
-    const observer = new IntersectionObserver(callback, {
-        threshold: 0.5
+        }
     });
+};
 
-    observer.observe(skills);
-    observer.observe(exps);
+const observer = new IntersectionObserver(callback, {
+    threshold: 0.5
+});
 
-    serviceItems.forEach(item => {
-        observer.observe(item);
-    });
-}
+if (skills) observer.observe(skills);
+if (exps) observer.observe(exps);
+
+serviceItems.forEach(item => {
+    if (item) observer.observe(item);
+});
+
+
 
 // ---------------------------------------------------------------------------
 //^ Full screen when the user click on the image
