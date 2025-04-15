@@ -640,7 +640,7 @@ section.home .container .text {
   animation: img-entry 0.5s linear 0s 1 forwards;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
   .home .image img {
     width: 900px;
   }
