@@ -640,23 +640,23 @@ section.home .container .text {
   animation: img-entry 0.5s linear 0s 1 forwards;
 }
 
-
-
 @media (max-width: 991px) {
   .home .image img {
-    width: 630px;
+    width: 900px;
   }
 }
 
 @media (max-width: 690px) {
   .home .image img { 
     right: 25%;
+    width: 630px;
   }
 }
 
 @media (max-width: 535px) {
   .home .image img { 
     right: 35%;
+    width: 630px;
   }
 }
 
