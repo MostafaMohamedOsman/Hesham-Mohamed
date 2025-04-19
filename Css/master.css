@@ -655,7 +655,7 @@ section.home .container .text {
 
 @media (max-width: 535px) {
   .home .image img { 
-    right: 35%;
+    right: 50%;
     width: 630px;
   }
 }
