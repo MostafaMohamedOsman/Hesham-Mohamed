@@ -57,13 +57,13 @@ const serviceItems = document.querySelectorAll(".services .container .service");
 
 const callback = (entries, observer) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        if (entry.isIntersecting) {
             const target = entry.target;
-            if (target === skills) {
+            if (target === skills && entry.intersectionRatio >= 0.5) {
                 skills.classList.add("animate");
-            } else if (target === exps) {
+            } else if (target === exps && entry.intersectionRatio >= 0.5) {
                 exps.classList.add("animate-two");
-            } else {
+            } else if (entry.intersectionRatio) {
                 target.classList.add("service-animate");
                 observer.unobserve(target);
             }
@@ -72,7 +72,7 @@ const callback = (entries, observer) => {
 };
 
 const observer = new IntersectionObserver(callback, {
-    threshold: 0.5
+    threshold: [0.1, 0.5]
 });
 
 if (skills) observer.observe(skills);
