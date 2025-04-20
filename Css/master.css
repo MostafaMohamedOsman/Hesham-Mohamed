@@ -423,6 +423,7 @@ section.home .container {
   section.home .container {
     padding-left: 20px;
     padding-right: 20px;
+    height: calc(100vh - 55px);
   }
 }
 
@@ -439,7 +440,6 @@ section.home .container {
 
 .home .info {
   position: relative;
-  height: calc(100vh + 70px);
   width: fit-content;
   display: flex;
   flex-direction: column;
@@ -458,6 +458,7 @@ section.home .container .text {
 .home .container > div .home-bottom {
   text-align: left;
   position: relative;
+  top: 25px;
   -webkit-animation: scale-on-load 1s ease 0.5s 1 forwards;
   animation: scale-on-load 1s ease 0.5s 1 forwards;
   -webkit-transform: scale(0);
@@ -500,7 +501,7 @@ section.home .container .text {
   color: var(--white-color);
   font-size: 3em;
   font-weight: 700;
-  margin: 20px 0 15px;
+  margin: 20px 0 10px;
   letter-spacing: -1px;
   -webkit-transform: translateX(-4px);
   -moz-transform: translateX(-4px);
@@ -510,12 +511,8 @@ section.home .container .text {
 }
 
 @media (max-width: 767px) {
-  .home h2 span {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
+    .home h2{
+      margin: 0;
   }
 }
 
@@ -524,7 +521,7 @@ section.home .container .text {
   color: var(--bg-color);
   font-weight: 600;
   font-size: 1.5em;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 .home .container a.main-btn {
@@ -540,7 +537,6 @@ section.home .container .text {
   );
   background-size: 200% 98%;
   background-position: right bottom;
-  margin: 15px 0;
   border: 2px solid;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -642,6 +638,7 @@ section.home .container .text {
 
 @media (max-width: 1200px) {
   .home .image img {
+    right: 25%;
     width: 900px;
   }
 }

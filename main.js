@@ -12,8 +12,9 @@ window.addEventListener("scroll", () => {
     }
     lastScrollY = currentScrollY;
 });
-
+// ---------------------------------------------------------------------------
 //^ Scoll to top
+
 let scrollToTopBtn = document.querySelector(".scroll-to-top");
 window.onscroll = () => {
     if (window.scrollY >= 600) {
@@ -30,13 +31,15 @@ scrollToTopBtn.onclick = () => {
         behavior: "smooth"
     });
 }
+
 // ---------------------------------------------------------------------------
 //^ image under the nav bar
+
 const mainImg = document.querySelector(".home .image");
 
-// mainImg.style.top = `${headerHeight}px`
-
+// ---------------------------------------------------------------------------
 //^ mobile nav bar mouse over
+
 const allElements = Array.from(document.querySelectorAll("body *"));
 const CheckBox = document.getElementById("checked");
 
@@ -48,6 +51,7 @@ document.body.addEventListener("click", event => {
 window.addEventListener("scroll", () => {
     CheckBox.checked = false;
 });
+
 // ---------------------------------------------------------------------------
 //^ Annimation
 
@@ -63,7 +67,7 @@ const callback = (entries, observer) => {
                 skills.classList.add("animate");
             } else if (target === exps && entry.intersectionRatio >= 0.5) {
                 exps.classList.add("animate-two");
-            } else if (entry.intersectionRatio) {
+            } else {
                 target.classList.add("service-animate");
                 observer.unobserve(target);
             }
@@ -82,10 +86,9 @@ serviceItems.forEach(item => {
     if (item) observer.observe(item);
 });
 
-
-
 // ---------------------------------------------------------------------------
 //^ Full screen when the user click on the image
+
 function initialFullScreen(element) {
     const popupImg = element.querySelector(".popup-img");
     const popupClose = element.querySelector(".slider-wrapper .popup-img .close-popup");
@@ -125,6 +128,7 @@ document.querySelectorAll('.slider-wrapper').forEach(initialFullScreen);
 
 // ---------------------------------------------------------------------------
 //^ Image slider parts
+
 function initialSlider(slider) {
     const popupImg = slider.querySelector(".popup-img");
     const sliderImages = Array.from(slider.querySelectorAll('.slider-container img'));
