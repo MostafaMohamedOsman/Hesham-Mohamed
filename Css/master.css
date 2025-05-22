@@ -103,8 +103,8 @@ html {
 }
 
 .container {
-  padding-left: 2.4rem;
-  padding-right: 2.4rem;
+  padding-left: 5.4rem;
+  padding-right: 5.4rem;
 }
 
 .no-scroll {
@@ -409,11 +409,9 @@ section.home .container {
   display: flex;
   justify-content: space-between;
   text-align: center;
-  background: url(../Images/backgroundONe.png) fixed center no-repeat;
+  background: url(../Images/backgroundONe.png) center no-repeat;
   width: 100%;
   height: 100vh;
-  padding-left: 2.4em;
-  padding-right: 2.4em;
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -681,14 +679,13 @@ section.home .container .text {
   display: grid;
   grid-template-columns: 35% 65%;
   gap: 25px;
-  padding: 0 100px;
 }
 
 @media (max-width: 767px) {
   .expertise .container {
     display: flex;
     flex-direction: column;
-    padding: 0 50px;
+    padding: 0 20px;
   }
 }
 
@@ -811,14 +808,19 @@ section.home .container .text {
 
 .services {
   padding: 70px 0;
-  background: url(../Images/backgroundTwo.png) fixed center no-repeat;
+  background: url(../Images/backgroundTwo.png) no-repeat;
   position: relative;
   width: 100%;
-  align-content: center;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
+
+@media (max-width: 767px) {
+  .services{
+  background-position: top right;
+  }
+}
+
 
 .services::before {
   content: "";
@@ -1065,8 +1067,14 @@ section.home .container .text {
 
 .projects .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 20px 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+@media (max-width: 767px) {
+  .projects .container {
+  padding: 0 20px;
+  }
 }
 
 @media (max-width: 826px) {
@@ -1210,7 +1218,7 @@ section.home .container .text {
   height: 100%;
   left: 0;
   top: 0;
-
+  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1218,7 +1226,7 @@ section.home .container .text {
 }
 
 .contact .container::before {
-  background: url(../Images/contactLanding.webp) fixed center no-repeat;
+  background: url(../Images/contactLanding.webp) center no-repeat;
   background-size: cover;
   content: "";
   position: absolute;
