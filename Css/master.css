@@ -703,9 +703,8 @@ section.home .container .text {
   -ms-transition: 1s;
   -o-transition: 1s;
   transition: 1s;
-  -webkit-animation: img-appear 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s 1
-    forwards;
-  animation: img-appear 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s 1 forwards;
+  -webkit-animation: img-appear 0.8s 0s 1 forwards;
+  animation: img-appear 0.8s 0s 1 forwards;
 }
 
 @media (min-width: 992px) {
