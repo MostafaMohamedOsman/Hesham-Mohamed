@@ -314,3 +314,9 @@ images.forEach((element) => {
     event.preventDefault();
   });
 });
+
+//^ حل مشكلة الوميض عند تحميل الصفحة
+
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
