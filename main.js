@@ -33,11 +33,6 @@ scrollToTopBtn.onclick = () => {
 };
 
 // ---------------------------------------------------------------------------
-//^ image under the nav bar
-
-const mainImg = document.querySelector(".home .image");
-
-// ---------------------------------------------------------------------------
 //^ mobile nav bar mouse over
 
 const allElements = Array.from(document.querySelectorAll("body *"));
@@ -302,18 +297,6 @@ function initialSlider(slider) {
 }
 // Initialize All Sliders
 document.querySelectorAll(".slider-wrapper").forEach(initialSlider);
-
-let images = document.querySelectorAll("img");
-images.forEach((element) => {
-  element.addEventListener("contextmenu", (event) => {
-    event.preventDefault();
-  });
-});
-images.forEach((element) => {
-  element.addEventListener("dragstart", (event) => {
-    event.preventDefault();
-  });
-});
 
 //^ حل مشكلة الوميض عند تحميل الصفحة
 
