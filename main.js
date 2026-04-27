@@ -1,3 +1,61 @@
+//^ Fetch Categories from the api
+async function fetchAndDisplayCategories() {
+  try {
+    const catRespose = await fetch(
+      "https://heshamosmandesignstudio-production.up.railway.app/api/user/category",
+    );
+    if (!catRespose.ok) {
+      throw new Error("Connection With Categories API Failed!!");
+    }
+    const jsonCategoryData = await catRespose.json();
+    const categorysData = jsonCategoryData.data;
+    console.log(categorysData);
+
+    const categoryContainer = document.querySelector("#projects .container");
+
+    // سطر الحماية لمنع خطأ TypeError: Cannot read properties of null
+    if (!categoryContainer) return;
+
+    categorysData.forEach((category) => {
+      const categoryBox = document.createElement("div");
+      categoryBox.setAttribute("class", "box");
+
+      const catImage = document.createElement("a");
+      catImage.setAttribute("class", "image");
+      catImage.setAttribute("href", category.category_description);
+
+      const image = document.createElement("img");
+      image.setAttribute("src", category.category_image);
+
+      const categoryInfo = document.createElement("div");
+      categoryInfo.setAttribute("class", "info");
+
+      const categoryTitle = document.createElement("h3");
+      categoryTitle.innerText = category.category_name;
+
+      const catLink = document.createElement("a");
+      catLink.setAttribute("href", category.category_description);
+      const icon = document.createElement("i");
+      icon.className = "fa-solid fa-angles-right";
+      catLink.append("View More", icon);
+
+      catImage.appendChild(image);
+
+      categoryInfo.appendChild(categoryTitle);
+      categoryInfo.appendChild(catLink);
+
+      categoryBox.appendChild(catImage);
+      categoryBox.appendChild(categoryInfo);
+
+      categoryContainer.appendChild(categoryBox);
+    });
+  } catch (reason) {
+    console.log(reason);
+  }
+}
+
+fetchAndDisplayCategories();
+
 //^ Header move on scroll
 let header = document.querySelector("header");
 let headerHeight = header.offsetHeight;
@@ -90,9 +148,8 @@ serviceItems.forEach((item) => {
 
 function initialFullScreen(element) {
   const popupImg = element.querySelector(".popup-img");
-  const popupClose = element.querySelector(
-    ".slider-wrapper .popup-img .close-popup"
-  );
+  // const popupClose = element.querySelector(".slider-wrapper .popup-img .close-popup");
+  const popupClose = element.querySelector(".popup-img .close-popup");
   element.querySelectorAll(".slider-container img").forEach((image) => {
     image.onclick = () => {
       element.querySelector(".popup-img img").src = image.getAttribute("src");
@@ -131,7 +188,7 @@ document.querySelectorAll(".slider-wrapper").forEach(initialFullScreen);
 function initialSlider(slider) {
   const popupImg = slider.querySelector(".popup-img");
   const sliderImages = Array.from(
-    slider.querySelectorAll(".slider-container img")
+    slider.querySelectorAll(".slider-container img"),
   );
   const sliderCount = sliderImages.length;
   const sliderImagesBox = slider.querySelector(".slider-container");
@@ -153,7 +210,7 @@ function initialSlider(slider) {
   let paginationCreatedUl = slider.querySelector(".pagination-ul");
   //Get pagination items
   let paginationBullets = Array.from(
-    slider.querySelectorAll(".pagination-ul li")
+    slider.querySelectorAll(".pagination-ul li"),
   );
   //Loop through all bullets items
   paginationBullets.forEach(function (bullet) {
