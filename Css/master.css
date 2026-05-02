@@ -1602,6 +1602,7 @@ h1.section-heading::after {
 @media (max-width: 767px) {
   .projects-wrapper .container {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* update */
     padding: 20px;
   }
 }
