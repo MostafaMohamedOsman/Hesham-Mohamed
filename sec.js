@@ -1,3 +1,6 @@
+import {fetchLink} from './main.js'
+
+
 //^ Header move on scroll
 let header = document.querySelector("header");
 let headerHeight = header ? header.offsetHeight : 0;
@@ -73,9 +76,7 @@ async function FetchAndDisplayProjects() {
   if (!projectsWrapper) return;
 
   try {
-    const response = await fetch(
-      "https://heshamosmandesignstudio-production.up.railway.app/api/user/category",
-    );
+    const response = await fetch(fetchLink);
 
     if (!response.ok) {
       throw new Error("Connection With Categories API Failed!!");

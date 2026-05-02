@@ -1,9 +1,10 @@
+export const fetchLink = "https://etshointeriors.com/api/user/category";
+
+
 //^ Fetch Categories from the api
 async function fetchAndDisplayCategories() {
   try {
-    const catRespose = await fetch(
-      "https://heshamosmandesignstudio-production.up.railway.app/api/user/category",
-    );
+    const catRespose = await fetch(fetchLink);
     if (!catRespose.ok) {
       throw new Error("Connection With Categories API Failed!!");
     }
