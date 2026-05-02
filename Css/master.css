@@ -1602,7 +1602,7 @@ h1.section-heading::after {
 @media (max-width: 767px) {
   .projects-wrapper .container {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    padding: 0 20px;
+    padding: 20px;
   }
 }
 
@@ -1862,7 +1862,9 @@ body.loaded {
 }
 
 .slides {
+  height: 100%;
   display: flex;
+  align-items: center;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; /* لإخفاء السكرول في Firefox */
