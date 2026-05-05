@@ -1868,11 +1868,12 @@ body.loaded {
   align-items: center;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* لإخفاء السكرول في Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* scroll-behavior: smooth; */
+
   scroll-snap-stop: always;
-}
+} 
 
 /* لإخفاء السكرول في Chrome و Safari و Edge */
 .slides::-webkit-scrollbar {
@@ -1885,6 +1886,7 @@ body.loaded {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   scroll-snap-align: center;
+  scroll-snap-stop: always;
   pointer-events: none;
 }
 
@@ -1971,6 +1973,19 @@ body.loaded {
   gap: 6px;
   justify-content: center;
   cursor: pointer; /* عشان يبان إن النقط قابلة للضغط */
+  user-select: none;
+  -webkit-user-select: none; /* لمتصفحات Safari و Chrome موبايل */
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  /* 2. إلغاء الـ "Tap Highlight" الأزرق أو الرمادي اللي بيظهر حول الـ wrapper */
+  -webkit-tap-highlight-color: transparent;
+
+  /* 3. منع ظهور القوائم المنبثقة عند الضغط المطول (للآيفون) */
+  -webkit-touch-callout: none;
+
+  /* 4. التأكد إن الـ wrapper مبيخدش Focus (البرواز الأزرق) */
+  outline: none;
 }
 
 .dot {
