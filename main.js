@@ -1,4 +1,4 @@
-export const fetchLink = "https://etshointeriors.com/api/user/category";
+export const fetchLink = "https://admin.etshointeriors.com/api/user/category";
 
 
 //^ Fetch Categories from the api
