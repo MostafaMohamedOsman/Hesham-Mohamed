@@ -1871,6 +1871,7 @@ body.loaded {
   scrollbar-width: none; /* لإخفاء السكرول في Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scroll-behavior: smooth;
+  scroll-snap-stop: always;
 }
 
 /* لإخفاء السكرول في Chrome و Safari و Edge */
