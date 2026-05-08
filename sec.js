@@ -1,5 +1,4 @@
-import {fetchLink} from './main.js'
-
+import { fetchLink } from "./main.js";
 
 //^ Header move on scroll
 let header = document.querySelector("header");
@@ -117,7 +116,7 @@ async function FetchAndDisplayProjects() {
 
           const sliderContent = document.createElement("div");
           sliderContent.className = "slider-content";
-          // ^^^ [تعديل] إضافة زر Full-screen هنا ^^^
+          // ^^^  إضافة زر Full-screen هنا ^^^
           sliderContent.innerHTML = `
             <div class="image-counter"><span class="current-img">1</span> / <span class="total-imgs">${project.project_image.length}</span></div>
             
@@ -135,9 +134,14 @@ async function FetchAndDisplayProjects() {
 
           sliderContainer.appendChild(sliderContent);
 
-          project.project_image.forEach((img) => {
+          project.project_image.forEach((img, index) => {
             const image = document.createElement("img");
             image.src = img.image;
+            if (index === 0) {
+              img.loading = "eager";
+            } else {
+              img.loading = "lazy";
+            }
             imageSlider.appendChild(image);
           });
 
@@ -169,7 +173,7 @@ async function FetchAndDisplayProjects() {
           // تهيئة السلايدر العادي
           initSlider(projectContainer);
 
-          // ^^^ [الجديد هنا] إضافة حدث ضغط لزر Full-screen ^^^
+          // ^^^ إضافة حدث ضغط لزر Full-screen ^^^
           const fsBtn = projectContainer.querySelector(".fs-btn");
           fsBtn.addEventListener("click", () => {
             openFullscreen(projectContainer);
@@ -183,7 +187,7 @@ async function FetchAndDisplayProjects() {
 }
 
 // ---------------------------------------------------------------------------
-// ^^^ [الجديد هنا] دالة فتح الـ Full-screen ^^^
+// ^^^  دالة فتح  Full-screen ^^^
 function openFullscreen(originalContainer) {
   // 1. إنشاء الطبقة الخلفية المعتمة (Overlay)
   const overlay = document.createElement("div");
@@ -284,7 +288,7 @@ function initSlider(container) {
     updateButtonsState(currentIndex);
   });
 
-  // [الجديد] جعل النقط Clicking
+  //  جعل النقط clickable
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
       if (slideImages[index]) {
