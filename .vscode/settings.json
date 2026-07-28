@@ -1,7 +1,6 @@
 {
-  "cSpell.words": [
-    "Hesham"
-  ],
+  "cSpell.words": ["Hesham"],
   "CodeGPT.apiKey": "CodeGPT Plus Beta",
-  "liveServer.settings.multiRootWorkspaceName": "Hesham Portfolio"
+  "liveServer.settings.multiRootWorkspaceName": "Hesham Portfolio",
+  "liveServer.settings.port": 5501
 }
