@@ -135,7 +135,19 @@ async function FetchAndDisplayProjects() {
           sliderContainer.appendChild(sliderContent);
 
           project.project_image.forEach((media, index) => {
-            imageSlider.appendChild(createMediaElement(media.image, index));
+            const mediaWrapper = document.createElement("div");
+            mediaWrapper.className = "slide-media";
+            const mediaElement = createMediaElement(media.image, index);
+            mediaWrapper.appendChild(mediaElement);
+
+            if (mediaElement.tagName === "IMG") {
+              mediaWrapper.classList.add("is-image-slide");
+              mediaWrapper.addEventListener("click", () => {
+                openFullscreen(projectContainer);
+              });
+            }
+
+            imageSlider.appendChild(mediaWrapper);
           });
 
           const projectFooter = document.createElement("footer");
@@ -183,15 +195,16 @@ function createMediaElement(mediaUrl, index) {
   const mediaType = getMediaType(mediaUrl);
   const mediaElement = document.createElement(mediaType);
 
-  mediaElement.src = mediaUrl;
+  mediaElement.dataset.src = mediaUrl;
   mediaElement.dataset.mediaType = mediaType;
 
   if (mediaType === "video") {
     mediaElement.controls = true;
     mediaElement.playsInline = true;
-    mediaElement.preload = index === 0 ? "auto" : "metadata";
+    mediaElement.preload = "none";
   } else {
-    mediaElement.loading = index === 0 ? "eager" : "lazy";
+    mediaElement.loading = "lazy";
+    mediaElement.decoding = "async";
     mediaElement.alt = "Project media";
   }
 
@@ -287,7 +300,9 @@ function openFullscreen(originalContainer) {
 
 function initFullscreenZoom(container, controls) {
   const slider = container.querySelector(".slides");
-  const media = Array.from(slider.querySelectorAll("img, video"));
+  const media = Array.from(
+    slider.querySelectorAll(".slide-media > img, .slide-media > video"),
+  );
   const zoomInButton = controls.querySelector(".fs-zoom-in");
   const zoomOutButton = controls.querySelector(".fs-zoom-out");
   const resetButton = controls.querySelector(".fs-zoom-reset");
@@ -393,29 +408,57 @@ function initSlider(container) {
 
   const rightArrowBtn = container.querySelector(".prev-btn");
   const leftArrowBtn = container.querySelector(".next-btn");
-  const slideMedia = slider.querySelectorAll("img, video");
+  const slideMedia = slider.querySelectorAll(".slide-media");
 
   let currentIndex = 0;
 
+  const loadMedia = (mediaWrapper) => {
+    if (!mediaWrapper) return;
+
+    const mediaElement = mediaWrapper.querySelector("img, video");
+    if (!mediaElement || mediaElement.src) return;
+
+    mediaWrapper.classList.add("is-loading");
+    mediaElement.src = mediaElement.dataset.src;
+    delete mediaElement.dataset.src;
+
+    if (mediaElement.tagName === "VIDEO") {
+      mediaElement.load();
+    }
+  };
+
   const isMediaLoaded = (media) => {
     if (!media) return true;
-    return media.tagName === "IMG"
-      ? media.complete && media.naturalWidth > 0
-      : media.readyState >= 3;
+    const mediaElement = media.querySelector("img, video");
+    return mediaElement.tagName === "IMG"
+      ? mediaElement.complete && mediaElement.naturalWidth > 0
+      : mediaElement.readyState >= 3;
   };
 
   const updateLoadingState = () => {
     const currentMedia = slideMedia[currentIndex];
-    slider.classList.toggle("is-loading", !isMediaLoaded(currentMedia));
+    currentMedia?.classList.toggle("is-loading", !isMediaLoaded(currentMedia));
   };
 
-  slideMedia.forEach((media) => {
-    media.addEventListener("load", updateLoadingState);
-    media.addEventListener("loadeddata", updateLoadingState);
-    media.addEventListener("error", () =>
-      slider.classList.remove("is-loading"),
+  slideMedia.forEach((mediaWrapper) => {
+    const mediaElement = mediaWrapper.querySelector("img, video");
+    mediaElement.addEventListener("load", updateLoadingState);
+    mediaElement.addEventListener("loadeddata", updateLoadingState);
+    mediaElement.addEventListener("error", () =>
+      mediaWrapper.classList.remove("is-loading"),
     );
   });
+
+  const mediaObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) loadMedia(entry.target);
+      });
+    },
+    { root: null, rootMargin: "0px", threshold: 0.1 },
+  );
+
+  slideMedia.forEach((mediaWrapper) => mediaObserver.observe(mediaWrapper));
 
   updateLoadingState();
 
@@ -443,6 +486,7 @@ function initSlider(container) {
 
     if (counter) counter.textContent = currentIndex + 1;
     updateButtonsState(currentIndex);
+    loadMedia(slideMedia[currentIndex]);
     updateLoadingState();
   });
 

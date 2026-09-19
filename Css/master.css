@@ -2049,7 +2049,22 @@ body.loaded {
   scroll-snap-stop: always;
 }
 
-.slides.is-loading::before {
+.slide-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+  overflow: hidden;
+  background: #000;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.slide-media.is-image-slide {
+  cursor: pointer;
+}
+
+.slide-media.is-loading::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -2057,7 +2072,7 @@ body.loaded {
   background: #000;
 }
 
-.slides.is-loading::after {
+.slide-media.is-loading::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -2086,11 +2101,11 @@ body.loaded {
 .slides img,
 .slides video {
   width: 100%;
+  height: 100%;
+  display: block;
   flex-shrink: 0;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
 }
 
 .slides img {
