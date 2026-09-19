@@ -418,7 +418,10 @@ function initSlider(container) {
     const mediaElement = mediaWrapper.querySelector("img, video");
     if (!mediaElement || mediaElement.src) return;
 
-    mediaWrapper.classList.add("is-loading");
+    if (mediaElement.tagName === "IMG") {
+      mediaWrapper.classList.add("is-loading");
+    }
+
     mediaElement.src = mediaElement.dataset.src;
     delete mediaElement.dataset.src;
 
@@ -432,21 +435,27 @@ function initSlider(container) {
     const mediaElement = media.querySelector("img, video");
     return mediaElement.tagName === "IMG"
       ? mediaElement.complete && mediaElement.naturalWidth > 0
-      : mediaElement.readyState >= 3;
+      : true;
   };
 
   const updateLoadingState = () => {
     const currentMedia = slideMedia[currentIndex];
-    currentMedia?.classList.toggle("is-loading", !isMediaLoaded(currentMedia));
+    const mediaElement = currentMedia?.querySelector("img, video");
+    if (mediaElement?.tagName !== "IMG") {
+      currentMedia?.classList.remove("is-loading");
+      return;
+    }
+    currentMedia.classList.toggle("is-loading", !isMediaLoaded(currentMedia));
   };
 
   slideMedia.forEach((mediaWrapper) => {
     const mediaElement = mediaWrapper.querySelector("img, video");
-    mediaElement.addEventListener("load", updateLoadingState);
-    mediaElement.addEventListener("loadeddata", updateLoadingState);
-    mediaElement.addEventListener("error", () =>
-      mediaWrapper.classList.remove("is-loading"),
-    );
+    if (mediaElement.tagName === "IMG") {
+      mediaElement.addEventListener("load", updateLoadingState);
+      mediaElement.addEventListener("error", () =>
+        mediaWrapper.classList.remove("is-loading"),
+      );
+    }
   });
 
   const mediaObserver = new IntersectionObserver(
