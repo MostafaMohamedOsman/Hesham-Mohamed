@@ -134,15 +134,8 @@ async function FetchAndDisplayProjects() {
 
           sliderContainer.appendChild(sliderContent);
 
-          project.project_image.forEach((img, index) => {
-            const image = document.createElement("img");
-            image.src = img.image;
-            if (index === 0) {
-              img.loading = "eager";
-            } else {
-              img.loading = "lazy";
-            }
-            imageSlider.appendChild(image);
+          project.project_image.forEach((media, index) => {
+            imageSlider.appendChild(createMediaElement(media.image, index));
           });
 
           const projectFooter = document.createElement("footer");
@@ -186,6 +179,39 @@ async function FetchAndDisplayProjects() {
   }
 }
 
+function createMediaElement(mediaUrl, index) {
+  const mediaType = getMediaType(mediaUrl);
+  const mediaElement = document.createElement(mediaType);
+
+  mediaElement.src = mediaUrl;
+  mediaElement.dataset.mediaType = mediaType;
+
+  if (mediaType === "video") {
+    mediaElement.controls = true;
+    mediaElement.playsInline = true;
+    mediaElement.preload = index === 0 ? "auto" : "metadata";
+  } else {
+    mediaElement.loading = index === 0 ? "eager" : "lazy";
+    mediaElement.alt = "Project media";
+  }
+
+  return mediaElement;
+}
+
+function getMediaType(mediaUrl) {
+  try {
+    const extension = new URL(mediaUrl, window.location.href).pathname
+      .split(".")
+      .pop()
+      .toLowerCase();
+    const videoExtensions = ["mp4", "webm", "ogg", "ogv", "mov", "m4v"];
+
+    return videoExtensions.includes(extension) ? "video" : "img";
+  } catch {
+    return "img";
+  }
+}
+
 // ---------------------------------------------------------------------------
 // ^^^  دالة فتح  Full-screen ^^^
 function openFullscreen(originalContainer) {
@@ -200,6 +226,16 @@ function openFullscreen(originalContainer) {
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     `;
   overlay.appendChild(closeBtn);
+
+  const zoomControls = document.createElement("div");
+  zoomControls.className = "fs-zoom-controls";
+  zoomControls.innerHTML = `
+    <button type="button" class="fs-zoom-out" aria-label="تصغير">-</button>
+    <span class="fs-zoom-level">100%</span>
+    <button type="button" class="fs-zoom-in" aria-label="تكبير">+</button>
+    <button type="button" class="fs-zoom-reset" aria-label="إعادة ضبط التكبير">Reset</button>
+  `;
+  overlay.appendChild(zoomControls);
 
   // 3. عمل نسخة عميقة (Clone) من حاوية المشروع بالكامل
   const clonedContainer = originalContainer.cloneNode(true);
@@ -223,6 +259,7 @@ function openFullscreen(originalContainer) {
 
   // 4. تهيئة السلايدر للنسخة الجديدة (مهم جداً!)
   initSlider(clonedContainer);
+  initFullscreenZoom(clonedContainer, zoomControls);
 
   // 5. منطق الإغلاق
   const closeFS = () => {
@@ -247,6 +284,105 @@ function openFullscreen(originalContainer) {
     }
   });
 }
+
+function initFullscreenZoom(container, controls) {
+  const slider = container.querySelector(".slides");
+  const media = Array.from(slider.querySelectorAll("img, video"));
+  const zoomInButton = controls.querySelector(".fs-zoom-in");
+  const zoomOutButton = controls.querySelector(".fs-zoom-out");
+  const resetButton = controls.querySelector(".fs-zoom-reset");
+  const levelLabel = controls.querySelector(".fs-zoom-level");
+  let scale = 1;
+  let offsetX = 0;
+  let offsetY = 0;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+
+  const getCurrentMedia = () => {
+    const index = Math.round(Math.abs(slider.scrollLeft) / slider.clientWidth);
+    return media[index] || media[0];
+  };
+
+  const renderZoom = () => {
+    const currentMedia = getCurrentMedia();
+    slider.classList.toggle("is-zoomed", scale > 1);
+    levelLabel.textContent = `${Math.round(scale * 100)}%`;
+
+    media.forEach((item) => {
+      item.style.transform =
+        item === currentMedia
+          ? `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${scale})`
+          : "";
+    });
+  };
+
+  const resetZoom = () => {
+    scale = 1;
+    offsetX = 0;
+    offsetY = 0;
+    renderZoom();
+  };
+
+  zoomInButton.addEventListener("click", () => {
+    scale = Math.min(10, scale + 0.5);
+    renderZoom();
+  });
+
+  zoomOutButton.addEventListener("click", () => {
+    scale = Math.max(1, scale - 0.5);
+    if (scale === 1) {
+      offsetX = 0;
+      offsetY = 0;
+    }
+    renderZoom();
+  });
+
+  resetButton.addEventListener("click", resetZoom);
+
+  slider.addEventListener("scroll", () => {
+    if (scale > 1) resetZoom();
+  });
+
+  slider.addEventListener("pointerdown", (event) => {
+    if (scale <= 1 || event.target !== getCurrentMedia()) return;
+    event.preventDefault();
+    isDragging = true;
+    dragStartX = event.clientX - offsetX;
+    dragStartY = event.clientY - offsetY;
+    slider.setPointerCapture(event.pointerId);
+  });
+
+  slider.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+    offsetX = event.clientX - dragStartX;
+    offsetY = event.clientY - dragStartY;
+    renderZoom();
+  });
+
+  const stopDragging = () => {
+    isDragging = false;
+  };
+  slider.addEventListener("pointerup", stopDragging);
+  slider.addEventListener("pointercancel", stopDragging);
+  slider.addEventListener("pointerleave", stopDragging);
+
+  slider.addEventListener(
+    "wheel",
+    (event) => {
+      event.preventDefault();
+      scale = Math.min(10, Math.max(1, scale - event.deltaY * 0.002));
+      if (scale === 1) {
+        offsetX = 0;
+        offsetY = 0;
+      }
+      renderZoom();
+    },
+    { passive: false },
+  );
+
+  renderZoom();
+}
 // ---------------------------------------------------------------------------
 
 // دالة الـ Slider (مع إضافة كود النقط clickable من الرد السابق)
@@ -257,24 +393,45 @@ function initSlider(container) {
 
   const rightArrowBtn = container.querySelector(".prev-btn");
   const leftArrowBtn = container.querySelector(".next-btn");
-  const slideImages = slider.querySelectorAll("img");
+  const slideMedia = slider.querySelectorAll("img, video");
 
   let currentIndex = 0;
 
+  const isMediaLoaded = (media) => {
+    if (!media) return true;
+    return media.tagName === "IMG"
+      ? media.complete && media.naturalWidth > 0
+      : media.readyState >= 3;
+  };
+
+  const updateLoadingState = () => {
+    const currentMedia = slideMedia[currentIndex];
+    slider.classList.toggle("is-loading", !isMediaLoaded(currentMedia));
+  };
+
+  slideMedia.forEach((media) => {
+    media.addEventListener("load", updateLoadingState);
+    media.addEventListener("loadeddata", updateLoadingState);
+    media.addEventListener("error", () =>
+      slider.classList.remove("is-loading"),
+    );
+  });
+
+  updateLoadingState();
+
   const updateButtonsState = (index) => {
-    if (slideImages.length <= 1) {
+    if (slideMedia.length <= 1) {
       if (leftArrowBtn) leftArrowBtn.disabled = true;
       if (rightArrowBtn) rightArrowBtn.disabled = true;
       return;
     }
     if (leftArrowBtn) leftArrowBtn.disabled = index === 0;
-    if (rightArrowBtn)
-      rightArrowBtn.disabled = index === slideImages.length - 1;
+    if (rightArrowBtn) rightArrowBtn.disabled = index === slideMedia.length - 1;
   };
 
   // تأكد من تهيئة العداد الكلي في البداية
   const totalCounter = container.querySelector(".total-imgs");
-  if (totalCounter) totalCounter.textContent = slideImages.length;
+  if (totalCounter) totalCounter.textContent = slideMedia.length;
 
   slider.addEventListener("scroll", () => {
     const width = slider.clientWidth;
@@ -286,13 +443,14 @@ function initSlider(container) {
 
     if (counter) counter.textContent = currentIndex + 1;
     updateButtonsState(currentIndex);
+    updateLoadingState();
   });
 
   //  جعل النقط clickable
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
-      if (slideImages[index]) {
-        slideImages[index].scrollIntoView({
+      if (slideMedia[index]) {
+        slideMedia[index].scrollIntoView({
           behavior: "smooth",
           block: "nearest",
           inline: "center",
@@ -303,8 +461,8 @@ function initSlider(container) {
 
   if (rightArrowBtn) {
     rightArrowBtn.addEventListener("click", () => {
-      if (currentIndex < slideImages.length - 1) {
-        slideImages[currentIndex + 1].scrollIntoView({
+      if (currentIndex < slideMedia.length - 1) {
+        slideMedia[currentIndex + 1].scrollIntoView({
           behavior: "smooth",
           block: "nearest",
           inline: "center",
@@ -316,7 +474,7 @@ function initSlider(container) {
   if (leftArrowBtn) {
     leftArrowBtn.addEventListener("click", () => {
       if (currentIndex > 0) {
-        slideImages[currentIndex - 1].scrollIntoView({
+        slideMedia[currentIndex - 1].scrollIntoView({
           behavior: "smooth",
           block: "nearest",
           inline: "center",
