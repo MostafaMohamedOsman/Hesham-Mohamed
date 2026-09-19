@@ -2434,8 +2434,14 @@ body:not(.main) {
   top: 0;
   color: white;
   padding: calc(64px + 72px) 0 96px;
-  margin: 0;
+  margin: 0 24px;
   overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .section-heading:not(.main):not(.footer) {
+    margin-inline: 16px;
+  }
 }
 
 body.bathrooms-page .section-heading:not(.main):not(.footer) {
